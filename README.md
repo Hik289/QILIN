@@ -12,17 +12,22 @@
   <img src="assets/readme-figure.png" alt="QILIN overview" width="100%">
 </p>
 
-**Figure 1.** The overview figure lays out a production-minded research flow from market features to model training, validation, prediction, experiment tracking, and monitoring.
+## Abstract
 
-## Scope
+This repository is a conference-style artifact for quantitative ML experiments over factors, models, and trials. It packages the code and notes needed to inspect the central research question: How can factor inputs, model variants, and trial outputs be compared in one workspace? The emphasis is on transparent entry points, reproducible execution, and clear separation between code, local data, and generated outputs.
 
-This repository is organized as a conference-style research artifact for factor inputs, model training, and trial management. QILIN is a compact quantitative ML workspace organized around reusable modules, factor inputs, model folders, and trial runs. It is built for iterative research: prepare factors, train candidate models, compare runs, and keep execution outputs separate from core code.
+## Artifact at a Glance
 
-The README is structured for fast inspection by reviewers and future collaborators: it states the artifact scope, the main entry points, the reproduction path, and the outputs that should be checked after a run.
+| Item | Details |
+| --- | --- |
+| Research question | How can factor inputs, model variants, and trial outputs be compared in one workspace? |
+| Primary artifact | Model code, factor folders, a run entry point, and trial outputs. |
+| Main entry points | `run.py`, `BasicModule.py`, `models/`, `factors_single/`, `trials/` |
+| Expected outputs | Model predictions, run logs, and trial comparisons. |
 
-## Artifact Contents
+## Repository Structure
 
-| Component | Role |
+| Item | Details |
 | --- | --- |
 | `BasicModule.py` | shared model or training utilities. |
 | `models/` | model definitions and experiment-specific architectures. |
@@ -30,29 +35,29 @@ The README is structured for fast inspection by reviewers and future collaborato
 | `trials/` | trial runs and experiment outputs. |
 | `run.py` | main execution entry point. |
 
-## Reproduction Guide
+## Reproducibility Protocol
 
 1. `git clone git@github.com:Hik289/QILIN.git`
 2. `python -m venv .venv && source .venv/bin/activate`
 3. `python -m pip install -U pip numpy pandas scipy scikit-learn matplotlib torch`
 4. Review `run.py`, configure the local data paths, and run a small trial before launching larger experiments.
+5. Record the data window, random seed, software versions, machine type, and exact command used for any full rerun.
+6. Store regenerated figures, tables, checkpoints, or reports under the existing result folders instead of overwriting raw inputs.
 
-For a full rerun, record the data window, random seed, software versions, machine type, and command used for each experiment. Keep raw datasets outside Git unless they are small public fixtures.
+## Evaluation Protocol
 
-## Experimental Workflow
-
-| Stage | What to Check |
+| Step | Reviewer-facing check |
 | --- | --- |
-| Setup | Confirm local data paths, environment packages, and any MATLAB or notebook paths before running experiments. |
-| Run | Execute the smallest script or notebook first, then scale to the full experiment once outputs match expectations. |
-| Inspect | Compare generated figures, logs, tables, and saved result folders against the intended analysis. |
-| Extend | Add new experiments as separate scripts or notebooks with explicit names instead of overwriting existing artifacts. |
+| Environment | Confirm the listed runtime or notebook environment starts without modifying tracked files. |
+| Minimal run | Execute the smallest entry point before launching longer experiments. |
+| Output check | Compare regenerated files with the expected figures, tables, logs, or reports named in this README. |
+| Extension check | Add new runs as separate scripts, notebooks, or result folders with explicit names. |
 
-## Expected Outputs
+## Expected Results
 
-- Recreated figures, tables, notebooks, reports, or saved result files from the listed entry points.
-- A clear mapping from each experiment command to its generated output location.
-- Updated notes when a script depends on local data, private paths, or external software.
+- The main scripts or notebooks should regenerate the project-specific artifacts listed in **Artifact at a Glance**.
+- Outputs should be traceable to a command, parameter setting, and data window.
+- Any private data path or machine-specific setting should be documented before sharing the artifact externally.
 
 ## Paper or Reference
 
@@ -60,7 +65,7 @@ No external paper link is currently attached to this project. For now, the code,
 
 ## Citation
 
-If this repository supports academic work, cite the linked paper when available. Otherwise cite the repository version used in your experiment.
+If this repository supports a paper, cite the paper first and the artifact version second. If no paper is attached, cite the repository snapshot used in the experiment.
 
 ```bibtex
 @misc{qilin_artifact_2026,
@@ -68,7 +73,7 @@ If this repository supports academic work, cite the linked paper when available.
   author = {Hik289},
   year = {2026},
   howpublished = {\url{https://github.com/Hik289/QILIN}},
-  note = {Research artifact}
+  note = {Conference-style research artifact}
 }
 ```
 
@@ -76,11 +81,11 @@ If this repository supports academic work, cite the linked paper when available.
 
 No explicit license file is included yet. Add one before public reuse, redistribution, or package release.
 
-## Reviewer Notes
+## Reviewer Checklist
 
-| Item | Status |
+| Claim | How to inspect it |
 | --- | --- |
-| Code | Included in this repository. |
-| Data | Expected to be configured locally unless a small fixture is committed. |
-| Environment | Base dependencies are listed in the reproduction guide; pin a lockfile for archival release. |
-| Results | Store generated artifacts under the existing result, report, log, or output folders. |
+| Code availability | Code and notebooks are present in the repository. |
+| Reproducibility | The protocol above gives the expected setup and run order. |
+| Result traceability | Generated outputs should live in named result, report, log, or output folders. |
+| Extensibility | New experiments should preserve existing artifacts and add clearly named outputs. |
